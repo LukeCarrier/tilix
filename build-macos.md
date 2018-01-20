@@ -17,10 +17,14 @@ Install necessary libraries:
 
 * [XQuartz](https://www.xquartz.org/), since X11 is not included in macOS any
   more
+* [GTK+](https://www.gtk.org/), for the UI
+* [VTE](https://github.com/GNOME/vte), for the terminal widget
 
 ```
 $ brew install \
-        caskroom/cask/xquartz
+        caskroom/cask/xquartz \
+        gtk+3 \
+        vte3
 ```
 
 ## Building
