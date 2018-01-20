@@ -13,6 +13,16 @@ Install the build tools ([`dmd` compiler](https://dlang.org/dmd-osx.html),
 $ brew install dmd dub
 ```
 
+Install necessary libraries:
+
+* [XQuartz](https://www.xquartz.org/), since X11 is not included in macOS any
+  more
+
+```
+$ brew install \
+        caskroom/cask/xquartz
+```
+
 ## Building
 
 ```

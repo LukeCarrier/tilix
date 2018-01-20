@@ -5,6 +5,7 @@
     "authors": ["Gerald Nunn"],
     "mainSourceFile": "source/app.d",
     "dflags-ldc": ["-disable-linker-strip-dead","-defaultlib=:libphobos2-ldc.a,:libdruntime-ldc.a"],
+    "lflags-osx": ["-L/usr/X11/lib"],
 
     "dependencies": {
         "gtk-d:gtkd": {
@@ -34,12 +35,14 @@
             "name": "default",
             "targetType": "executable",
             "libs-linux": ["X11"],
+            "libs-osx": ["X11"],
             "versions": ["StdLoggerDisableTrace"]
         },
         {
             "name": "trace",
             "targetType": "executable",
             "libs-linux": ["X11"],
+            "libs-osx": ["X11"],
             "debugVersions": ["Destructors"]
         },
         {
