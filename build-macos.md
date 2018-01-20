@@ -29,6 +29,12 @@ $ brew install \
         vte3
 ```
 
+And finally some tools to make our lives easier:
+
+```
+$ brew install xmlstarlet
+```
+
 ## Building
 
 ```
@@ -65,8 +71,26 @@ $ ./install.sh prefix
 
 ## Running
 
+Prepare a local dbus session, so that we're able to run Tilix without globally
+installing GSettings schema:
+
+```
+$ export DBUS_SESSION_BUS_ADDRESS="/tmp/dbus/dbus.$UID.usock"
+$ mkdir -p "$(dirname $DBUS_SESSION_BUS_ADDRESS)"
+$ export XDG_DATA_DIRS="export XDG_DATA_DIRS=$(pwd)/prefix/share"
+$ cp $(brew --prefix dbus)/share/dbus-1/session.conf prefix/share/dbus-1/session.conf
+$ xmlstarlet ed \
+        -L -u /busconfig/listen -v "unix:path=${DBUS_SESSION_BUS_ADDRESS}" \
+         prefix/share/dbus-1/session.conf
+$ exec dbus-launch --config-file prefix/share/dbus-1/session.conf $SHELL
+```
+
 Run Tilix directly from the working directory in which it was built:
 
 ```
 $ ./prefix/bin/tilix
 ```
+
+## Useful resources
+
+* [dbus on macOS](https://github.com/zbentley/dbus-osx-examples/tree/master/installation)
