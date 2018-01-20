@@ -23,6 +23,8 @@ Install necessary libraries:
 ```
 $ brew install \
         caskroom/cask/xquartz \
+        desktop-file-utils \
+        gettext \
         gtk+3 \
         vte3
 ```
@@ -33,10 +35,38 @@ $ brew install \
 $ dub build
 ```
 
+## Installation
+
+Ensure required directories are on `$PATH`:
+
+```
+$ export PATH="$PATH:$(brew --prefix gettext)/bin"
+```
+
+Help the install script find `gtk-update-icon-cache`:
+
+```
+$ sudo ln -s /usr/local/bin/gtk{3,}-update-icon-cache
+```
+
+If you're having trouble with `install.sh` failing to locate binaries, try
+inspecting the list of directories. Some Homebrew packages include version
+numbers in filenames:
+
+```
+$ echo $PATH | tr : $"\n"
+```
+
+Then install:
+
+```
+$ ./install.sh prefix
+```
+
 ## Running
 
 Run Tilix directly from the working directory in which it was built:
 
 ```
-$ ./tilix
+$ ./prefix/bin/tilix
 ```
